@@ -313,7 +313,7 @@
             $('#sending-message').text('Processing request, please wait...');
 
             $.ajax({
-                url: "{{ url('/add-branch') }}",
+                url: "{{ url('/add-inventory') }}",
                 type: "POST",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
