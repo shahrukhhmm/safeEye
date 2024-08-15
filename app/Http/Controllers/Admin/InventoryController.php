@@ -62,10 +62,10 @@ class InventoryController extends Controller
 
             Inventory::insert([
                 'name' => $req->name,
-                'discription' => $req->address,
-                'quantity' => $req->name,
-                'price' => $req->address,
-                'karat' => $req->address,
+                'discription' => $req->discription,
+                'quantity' => $req->quantity,
+                'price' => $req->price,
+                'karat' => $req->karat,
 
                 'created_at' => now(),
             ]);
