@@ -74,5 +74,45 @@ class InventoryController extends Controller
 
             return redirect()->back();
         }
+          // edit Inventory
+    public function editinventory($id){
 
+        $inventory= Inventory::find($id);
+
+        return response()->json([
+            'inventory'=>$inventory,
+        ]);
+    }
+
+
+
+    public function updateinventory(Request $req) {
+        $inventory = Inventory::find($req->inventoryId);
+    
+        if ($inventory) {
+            $inventory->name = $req->name;
+            $inventory->description = $req->update_description;
+            $inventory->quantity = $req->update_quantity;
+            $inventory->price = $req->update_price;
+            $inventory->karat = $req->update_karat;
+    
+            $inventory->save();
+        }
+    
+        return redirect()->back();
+    }
+    
+ // delete inventory
+ public function deleteinventory($id){
+
+    $inventory=Inventory::find($id);
+
+    if ($inventory) {
+        $inventory->delete();
+    }
+
+    session()->flash('message', 'Branch deleted successfully!');
+
+    return redirect()->back();
+}
 }

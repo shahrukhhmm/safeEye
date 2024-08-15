@@ -166,15 +166,15 @@
 
 
 
-        {{-- update user --}}
-        <div class="modal fade" id="editBranch" tabindex="-1" role="dialog" saria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        {{-- update Inventory --}}
+        <div class="modal fade" id="editinventory" tabindex="-1" role="dialog"
+            saria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-md" role="document">
 
                 <div class="modal-content ">
 
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title text-dark" id="exampleModalLabel">Edit Branch</h5>
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">Edit Inventory</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -191,12 +191,34 @@
 
                             <div class="form-group col-md-12">
 
-                                <label class="control-label">Name</label>
-                                <input type="text" name="update_name" id="update_name" class="form-control">
+                                <div class="form-group col-md-12">
 
-                                <label class="control-label">Address</label>
-                                <input type="text" name="update_address" id="update_address"
-                                    class="form-control">
+                                    <input type="hidden" name="inventory_id" id="inventory_id"
+                                        class="form-control">
+
+                                    <label class="control-label">Name</label>
+                                    <input type="text" name="update_name" id="update_name" class="form-control">
+
+                                    <label class="control-label">Description</label>
+                                    <input type="text" name="update_description" id="update_description"
+                                        class="form-control">
+
+                                    <label class="control-label">Quantity</label>
+                                    <input type="text" name="update_quantity" id="update_quantity"
+                                        class="form-control">
+
+                                    <label class="control-label">Price</label>
+                                    <input type="text" name="update_price" id="update_price"
+                                        class="form-control">
+
+
+                                    <label class="control-label">Karat</label>
+                                    <input type="text" name="update_karat" id="update_karat"
+                                        class="form-control">
+
+                                </div>
+
+
 
 
                             </div>
@@ -344,28 +366,25 @@
 
 
 
-{{--  edit Branch --}}
+{{--  edit inventory --}}
 <script>
     $(document).ready(function() {
-
         $(document).on('click', '.edit', function() {
-            var branchId = $(this).val();
+            var inventoryId = $(this).val();
 
-            $('#editBranch').modal('show');
+            $('#editinventory').modal('show');
 
             $.ajax({
                 type: "GET",
-                url: "edit-branch/" + branchId,
+                url: "edit-inventory/" + inventoryId,
                 success: function(response) {
-
-                    $('#branch_id').val(branchId);
-
-                    $('#update_name').val(response.branch.name);
-                    $('#update_address').val(response.branch.address);
-
-                    // console.log(response);
-                    // console.log(response.user.type);
-
+                    // Populate the modal fields with the correct data
+                    $('#inventory_id').val(inventoryId);
+                    $('#update_name').val(response.inventory.name);
+                    $('#update_description').val(response.inventory.description);
+                    $('#update_quantity').val(response.inventory.quantity);
+                    $('#update_price').val(response.inventory.price);
+                    $('#update_karat').val(response.inventory.karat);
                 }
             });
         });
@@ -376,44 +395,46 @@
 
 
 
-{{-- update country --}}
+
+{{-- update inventory --}}
+
 
 <script>
     $(document).ready(function() {
         $('#updateBtn').on('click', function() {
 
-            var branchId = $('#branch_id').val();
-
+            var inventoryId = $('#inventory_id').val();
             var name = $('#update_name').val();
-            var address = $('#update_address').val();
-
-
+            var update_description = $('#update_description').val();
+            var update_quantity = $('#update_quantity').val();
+            var update_price = $('#update_price').val();
+            var update_karat = $('#update_karat').val();
 
             $('#update-message').text('Processing request, please wait...');
 
             $.ajax({
-                url: "{{ url('/update-branch') }}",
-                type: 'GET',
+                url: "{{ url('/update-inventory') }}",
+                type: 'POST',
                 data: {
-                    'branchId': branchId,
-                    'name': name,
-                    'address': address,
-
+                    _token: '{{ csrf_token() }}', // Include CSRF token
+                    inventoryId: inventoryId,
+                    name: name,
+                    update_description: update_description,
+                    update_quantity: update_quantity,
+                    update_price: update_price,
+                    update_karat: update_karat,
                 },
-                success: function(response) {},
-
+                success: function(response) {
+                    $('#update-message').text('Update successful!');
+                },
                 error: function(xhr) {
-
-                    $('#update-message').text(xhr);
+                    $('#update-message').text('Error: ' + xhr.responseText);
                 },
                 complete: function() {
-                    $('#update-message').text('');
-                    $('#editBranch').modal('hide');
-                    // location.reload();
+                    $('#editinventory').modal('hide');
                     $('.inventory-listing').DataTable().ajax.reload();
                 }
             });
-
         });
     });
 </script>
