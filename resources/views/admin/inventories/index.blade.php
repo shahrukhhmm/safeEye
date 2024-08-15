@@ -310,6 +310,8 @@
             var form = $(this);
             var formData = new FormData(form[0]);
 
+            console.log(formData);
+
             $('#sending-message').text('Processing request, please wait...');
 
             $.ajax({
