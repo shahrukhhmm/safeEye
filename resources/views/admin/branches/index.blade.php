@@ -61,7 +61,10 @@
 
                         @if (session()->has('message'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Success</strong> &nbsp; {{ session()->get('message') }}
+                                <strong>Success</strong> &nbsp;
+
+                                {{ session()->get('message') }}
+
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -86,7 +89,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
 
                                 </tbody>
                             </table>
@@ -149,14 +151,14 @@
 
 
         {{-- update user --}}
-        <div class="modal fade" id="editUser" tabindex="-1" role="dialog" saria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="editBranch" tabindex="-1" role="dialog" saria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-md" role="document">
 
                 <div class="modal-content ">
 
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title text-dark" id="exampleModalLabel">Edit User</h5>
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">Edit Branch</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -164,7 +166,7 @@
 
                     <div class="modal-body text-dark">
 
-                        <input type="hidden" name="user_id" id="user_id">
+                        <input type="hidden" name="branch_id" id="branch_id">
 
                         <div id="update-message" class="text-danger fw-bold"></div>
 
@@ -176,8 +178,8 @@
                                 <label class="control-label">Name</label>
                                 <input type="text" name="update_name" id="update_name" class="form-control">
 
-                                <label class="control-label">Email</label>
-                                <input type="email" name="update_email" id="update_email" class="form-control">
+                                <label class="control-label">Address</label>
+                                <input type="text" name="update_address" id="update_address" class="form-control">
 
 
                             </div>
@@ -212,7 +214,7 @@
 
 
 
-
+{{-- data table  --}}
 <script type="text/javascript">
     $(function() {
         setTimeout(function() {
@@ -220,7 +222,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ url('/branch') }}",
+                    url: "{{ url('/branches-list') }}",
                     data: function(d) {
                         d.from_date = $('#from_date').val();
                         d.to_date = $('#to_date').val();
@@ -228,10 +230,10 @@
                 },
 
                 columns: [
-                    // {
-                    //     data: 'id',
-                    //     name: 'id'
-                    // },
+                    {
+                        data: 'id',
+                        name: 'id'
+                    },
                     {
                         data: 'name',
                         name: 'name'
@@ -241,8 +243,8 @@
                         name: 'address'
                     },
                     {
-                        data: 'created',
-                        name: 'created'
+                        data: 'created_by',
+                        name: 'created_by'
                     },
                     {
                         data: 'action',
@@ -267,7 +269,7 @@
 
 
 
-
+{{-- add data --}}
 <script>
     $(document).ready(function() {
         $('.add').click(function() {
@@ -312,24 +314,24 @@
 
 
 
-{{--  edit user --}}
+{{--  edit Branch --}}
 <script>
     $(document).ready(function() {
 
         $(document).on('click', '.edit', function() {
-            var userId = $(this).val();
+            var branchId = $(this).val();
 
-            $('#editUser').modal('show');
+            $('#editBranch').modal('show');
 
             $.ajax({
                 type: "GET",
-                url: "edit-user/" + userId,
+                url: "edit-branch/" + branchId,
                 success: function(response) {
 
-                    $('#user_id').val(userId);
+                    $('#branch_id').val(branchId);
 
-                    $('#update_name').val(response.user.name);
-                    $('#update_email').val(response.user.email);
+                    $('#update_name').val(response.branch.name);
+                    $('#update_address').val(response.branch.address);
 
                     // console.log(response);
                     // console.log(response.user.type);
@@ -350,22 +352,22 @@
     $(document).ready(function() {
         $('#updateBtn').on('click', function() {
 
-            var userId = $('#user_id').val();
+            var branchId = $('#branch_id').val();
 
             var name = $('#update_name').val();
-            var email = $('#update_email').val();
+            var address = $('#update_address').val();
 
 
 
             $('#update-message').text('Processing request, please wait...');
 
             $.ajax({
-                url: "{{ url('/update-user') }}",
+                url: "{{ url('/update-branch') }}",
                 type: 'GET',
                 data: {
-                    'userId': userId,
+                    'branchId': branchId,
                     'name': name,
-                    'email': email,
+                    'address': address,
 
                 },
                 success: function(response) {},
@@ -376,7 +378,7 @@
                 },
                 complete: function() {
                     $('#update-message').text('');
-                    $('#editUser').modal('hide');
+                    $('#editBranch').modal('hide');
                     // location.reload();
                     $('.branch-listing').DataTable().ajax.reload();
                 }

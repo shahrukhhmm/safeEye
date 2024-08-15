@@ -57,7 +57,25 @@ Route::middleware(['auth'])->group(function () {
 
     //================ branch
 
+
+
     Route::get('/branch', [BranchController::class, 'index'])->name('branch');
-    Route::post('/branch', [BranchController::class, 'index'])->name('branch');
+
+    // change the user to branch
+
+
+    Route::get('/branches-list', [BranchController::class, 'getBranch'])->name('branch.list');
+
+    // add branch
+    Route::post('/add-branch',                     [BranchController::class, 'addBranch'])->name('branch.add');
+
+    // edit branch
+    Route::get('/edit-branch/{id}',                [BranchController::class, 'editBranch'])->name('branch.edit');
+
+    // update branch
+    Route::get('/update-branch',                   [BranchController::class, 'updateBranch'])->name('branch.update');
+
+    // branch delete
+    Route::get('/branch-delete/{id}',              [BranchController::class, 'deleteBranch'])->name('branch.delete');
 
 });
