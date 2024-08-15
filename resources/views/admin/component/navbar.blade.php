@@ -21,6 +21,11 @@
                         <i class="icon-badge menu-icon"></i><span class="nav-text">Branches</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('/inventory') }}" aria-expanded="false">
+                        <i class="icon-badge menu-icon"></i><span class="nav-text">Inventories</span>
+                    </a>
+                </li>
             @elseif ($roleId == 2)
                 <li>
                     <a href="{{ url('/dashboard') }}" aria-expanded="false">
