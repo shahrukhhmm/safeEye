@@ -16,6 +16,11 @@
                         <i class="icon-badge menu-icon"></i><span class="nav-text">User Management</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('/branch') }}" aria-expanded="false">
+                        <i class="icon-badge menu-icon"></i><span class="nav-text">Branches</span>
+                    </a>
+                </li>
             @elseif ($roleId == 2)
                 <li>
                     <a href="{{ url('/dashboard') }}" aria-expanded="false">
