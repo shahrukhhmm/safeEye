@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('inventories', function (Blueprint $table) {
-            
+
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('quantity')->nullable();
-            $table->string('price')->nullable(); 
+            $table->string('price')->nullable();
             $table->string('karat')->nullable();
+            $table->string('branch_id')->nullable();
 
             $table->timestamps();
         });

@@ -70,6 +70,7 @@
                                     <tr>
 
                                         <th>ID</th>
+                                        <th>Branch</th>
                                         <th>Name</th>
                                         <th>Email</th>
 
@@ -113,6 +114,16 @@
                             <br>
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="form-group col-md-12">
+
+                                    <label class="control-label">Branch</label>
+                                    <select name="branch_id" id="branch_id" class="form-select">
+                                        <option selected disabled>Select Branch</option>
+                                        @foreach ($branches as $branch)
+                                            <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                        @endforeach
+
+                                    </select>
+
                                     <label class="control-label">Name</label>
                                     <input type="text" name="user_name" id="user_name" class="form-control" required>
                                     <label class="control-label">Email</label>
@@ -157,6 +168,15 @@
 
 
                         <div class="form-group col-md-12">
+
+                            <label class="control-label">Branch</label>
+                            <select name="update_branch_id" id="update_branch_id" class="form-select">
+                                <option selected disabled>Select Branch</option>
+                                @foreach ($branches as $branch)
+                                    <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                @endforeach
+
+                            </select>
 
                                 <label class="control-label">Name</label>
                                 <input type="text" name="update_name" id="update_name" class="form-control">
@@ -215,6 +235,10 @@
                 columns: [{
                         data: 'id',
                         name: 'id'
+                    },
+                    {
+                        data: 'branch.name',
+                        name: 'branch.name'
                     },
                     {
                         data: 'name',
@@ -312,6 +336,7 @@
                     $('#user_id').val(userId);
 
                     $('#update_name').val(response.user.name);
+                    $('#update_branch_id').val(response.user.branch_id);
                     $('#update_email').val(response.user.email);
 
                     // console.log(response);
@@ -337,6 +362,7 @@
 
             var name = $('#update_name').val();
             var email = $('#update_email').val();
+            var branch_id = $('#update_branch_id').val();
 
 
 
@@ -349,6 +375,7 @@
                     'userId': userId,
                     'name': name,
                     'email': email,
+                    'branch_id': branch_id,
 
                 },
                 success: function(response) {},

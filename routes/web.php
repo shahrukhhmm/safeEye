@@ -82,22 +82,19 @@ Route::middleware(['auth'])->group(function () {
      Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory');
 
      // change the Inventory
- 
- 
+
+
      Route::get('/inventory-list', [InventoryController::class, 'getInventory'])->name('inventory.list');
- 
+
      // add branch
      Route::post('/add-inventory', [InventoryController::class, 'addinventory'])->name('inventory.add');
- 
+
     //  // edit branch
      Route::get('/edit-inventory/{id}',[InventoryController::class, 'editinventory'])->name('inventory.edit');
- 
+
     //  // update branch
      Route::post('/update-inventory', [InventoryController::class, 'updateinventory'])->name('inventory.update');
- 
-    //  // branch delete
-    //  Route::get('/inventory-delete/{id}', [InventoryController::class, 'deleteinventory'])->name('inventory.delete');
- 
-     Route::delete('/inventory-delete/{id}', [InventoryController::class, 'deleteinventory'])->name('inventory.delete');
+
+     Route::get('/inventory-delete/{id}', [InventoryController::class, 'deleteinventory'])->name('inventory.delete');
 
 });

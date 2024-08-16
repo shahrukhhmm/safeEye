@@ -80,6 +80,7 @@
                                     <tr>
 
                                         <th>ID</th>
+                                        <th>Branch</th>
                                         <th>Name</th>
                                         <th>Discription</th>
                                         <th>Quantity</th>
@@ -130,6 +131,15 @@
                                 <div class="row d-flex justify-content-center align-items-center">
                                     <div class="form-group col-md-12">
 
+                                        <label class="control-label">Branch</label>
+                                        <select name="branch_id" id="branch_id" class="form-select">
+                                            <option selected disabled>Select Branch</option>
+                                            @foreach ($branches as $branch)
+                                                <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                            @endforeach
+
+                                        </select>
+
                                         <label class="control-label">Name</label>
                                         <input type="name" name="name" id="name" class="form-control"
                                             required>
@@ -149,6 +159,8 @@
                                         <label class="control-label">Karat</label>
                                         <input type="text" name="karat" id="karat" class="form-control"
                                             required>
+
+
                                     </div>
                                 </div>
 
@@ -195,6 +207,15 @@
 
                                     <input type="hidden" name="inventory_id" id="inventory_id"
                                         class="form-control">
+
+                                        <label class="control-label">Branch</label>
+                                        <select name="update_branch_id" id="update_branch_id" class="form-select">
+                                            <option selected disabled>Select Branch</option>
+                                            @foreach ($branches as $branch)
+                                                <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                            @endforeach
+
+                                        </select>
 
                                     <label class="control-label">Name</label>
                                     <input type="text" name="update_name" id="update_name" class="form-control">
@@ -271,6 +292,10 @@
                 columns: [{
                         data: 'id',
                         name: 'id'
+                    },
+                    {
+                        data: 'branch.name',
+                        name: 'branch.name'
                     },
                     {
                         data: 'name',
@@ -378,13 +403,14 @@
                 type: "GET",
                 url: "edit-inventory/" + inventoryId,
                 success: function(response) {
-                    // Populate the modal fields with the correct data
+
                     $('#inventory_id').val(inventoryId);
                     $('#update_name').val(response.inventory.name);
                     $('#update_description').val(response.inventory.description);
                     $('#update_quantity').val(response.inventory.quantity);
                     $('#update_price').val(response.inventory.price);
                     $('#update_karat').val(response.inventory.karat);
+                    $('#update_branch_id').val(response.inventory.branch_id);
                 }
             });
         });
@@ -409,6 +435,7 @@
             var update_quantity = $('#update_quantity').val();
             var update_price = $('#update_price').val();
             var update_karat = $('#update_karat').val();
+            var update_branch_id = $('#update_branch_id').val();
 
             $('#update-message').text('Processing request, please wait...');
 
@@ -423,6 +450,7 @@
                     update_quantity: update_quantity,
                     update_price: update_price,
                     update_karat: update_karat,
+                    update_branch_id: update_branch_id,
                 },
                 success: function(response) {
                     $('#update-message').text('Update successful!');
@@ -432,6 +460,7 @@
                 },
                 complete: function() {
                     $('#editinventory').modal('hide');
+                    $('#update-message').text('');
                     $('.inventory-listing').DataTable().ajax.reload();
                 }
             });

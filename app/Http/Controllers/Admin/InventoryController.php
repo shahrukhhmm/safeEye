@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -11,11 +12,12 @@ use Carbon\Carbon;
 class InventoryController extends Controller
 {
     public function index()
-
     {
         $inventory = Inventory::count();
 
-        return view('admin.inventories.index',compact('inventory'));
+        $branches = Branch::all();
+
+        return view('admin.inventories.index',compact('inventory','branches'));
     }
 
         // yajra pagination
@@ -28,12 +30,12 @@ class InventoryController extends Controller
 
                 if($fromDate == null && $toDate == null){
 
-                    $data = Inventory::get();
+                    $data = Inventory::with('branch')->get();
                 }
 
                 else{
                     //Date Filter
-                    $data = Inventory::whereBetween('created_at', [$fromDate, $toDate])->get();
+                    $data = Inventory::with('branch')->whereBetween('created_at', [$fromDate, $toDate])->get();
                 }
 
                 return Datatables::of($data)
@@ -42,7 +44,7 @@ class InventoryController extends Controller
                     ->addColumn('action', function ($row) {
 
                         $btn = '<button class="btn btn-sm  btn-info ml-2 my-3 edit" value="' . $row->id . '" type="button"><i class="fa fa-edit"></i></button>';
-                        $btn = $btn .  '<a class="btn btn-sm btn-danger ml-2 my-3" href="'.url('/Inventory-delete/'.$row->id).'" role="button"><i class="fa fa-trash"></i></a>';
+                        $btn = $btn .  '<a class="btn btn-sm btn-danger ml-2 my-3" href="'.url('/inventory-delete/'.$row->id).'" role="button"><i class="fa fa-trash"></i></a>';
 
                         return $btn;
                     })
@@ -66,10 +68,10 @@ class InventoryController extends Controller
                 'quantity' => $req->quantity,
                 'price' => $req->price,
                 'karat' => $req->karat,
+                'branch_id' => $req->branch_id,
 
                 'created_at' => now(),
             ]);
-
 
 
             return redirect()->back();
@@ -88,31 +90,33 @@ class InventoryController extends Controller
 
     public function updateinventory(Request $req) {
         $inventory = Inventory::find($req->inventoryId);
-    
+
         if ($inventory) {
             $inventory->name = $req->name;
             $inventory->description = $req->update_description;
             $inventory->quantity = $req->update_quantity;
             $inventory->price = $req->update_price;
             $inventory->karat = $req->update_karat;
-    
+            $inventory->branch_id = $req->update_branch_id;
+
             $inventory->save();
         }
-    
+
+
         return redirect()->back();
     }
-    
- // delete inventory
- public function deleteinventory($id){
 
-    $inventory=Inventory::find($id);
+    // delete inventory
+    public function deleteinventory($id){
 
-    if ($inventory) {
-        $inventory->delete();
+        $inventory=Inventory::find($id);
+
+        if ($inventory) {
+            $inventory->delete();
+        }
+
+        session()->flash('message', 'Inventory deleted successfully!');
+
+        return redirect()->back();
     }
-
-    session()->flash('message', 'Branch deleted successfully!');
-
-    return redirect()->back();
-}
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
@@ -15,9 +16,10 @@ class UserController extends Controller
     public function index()
 
     {
-        $users = User::count();
 
-        return view('admin.user.index',compact('users'));
+        $users = User::count();
+        $branches = Branch::all();
+        return view('admin.user.index',compact('users','branches'));
     }
 
 
@@ -31,12 +33,12 @@ class UserController extends Controller
 
             if($fromDate == null && $toDate == null){
 
-                $data = User::get();
+                $data = User::with('branch')->get();
             }
 
             else{
                 //Date Filter
-                $data = User::whereBetween('created_at', [$fromDate, $toDate])->get();
+                $data = User::with('branch')->whereBetween('created_at', [$fromDate, $toDate])->get();
             }
 
             return Datatables::of($data)
@@ -64,12 +66,6 @@ class UserController extends Controller
 
     public function addUser(Request $req){
 
-        // $validatedData = $req->validate([
-        //     'user_name' => 'required|string|max:255',
-        //     'user_email' => 'required|string|email|max:255|unique:users,email',
-        //     'user_password' => 'required|string|min:8',
-        // ]);
-
         $password = $req->user_password;
         $hashedPassword = Hash::make($password);
 
@@ -77,6 +73,7 @@ class UserController extends Controller
             'name' => $req->user_name,
             'email' => $req->user_email,
             'password' => $hashedPassword,
+            'branch_id' => $req->branch_id,
             'role_id' => 2,
             'created_at' => now(),
 
@@ -99,7 +96,7 @@ class UserController extends Controller
     }
 
 
-    // update country
+    // update user
     public function updateUser(Request $req){
 
         $user = User::find($req->userId);
@@ -107,6 +104,7 @@ class UserController extends Controller
         $user->name = $req->name;
 
         $user->email = $req->email;
+        $user->branch_id = $req->branch_id;
 
         if($req->password != null){
             $password = $req->password;
