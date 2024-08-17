@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\InventoryController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\InventoryCategoryController;
 
 
 
@@ -97,4 +98,26 @@ Route::middleware(['auth'])->group(function () {
 
      Route::get('/inventory-delete/{id}', [InventoryController::class, 'deleteinventory'])->name('inventory.delete');
 
+
+
+
+    //================ Inventory Category
+
+    Route::get('/inventoryCategory', [InventoryCategoryController::class, 'index'])->name('CAtegory');
+
+    // change the InventoryCategory
+
+
+    Route::get('/inventoryCategory-list', [InventoryCategoryController::class, 'getInventoryCategory'])->name('inventoryCategory.list');
+
+    // add branch
+    Route::post('/add-inventoryCategory', [InventoryCategoryController::class, 'addinventoryCategory'])->name('inventoryCategory.add');
+
+   //  // edit branch
+    Route::get('/edit-inventoryCategory/{id}',[InventoryCategoryController::class, 'editinventoryCategory'])->name('inventoryCategory.edit');
+
+   //  // update branch
+    Route::post('/update-inventoryCategory', [InventoryCategoryController::class, 'updateinventoryCategory'])->name('inventoryCategory.update');
+
+    Route::get('/inventoryCategory-delete/{id}', [InventoryCategoryController::class, 'deleteinventoryCategory'])->name('inventoryCategory.delete');
 });

@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <h3 class="card-title text-white">Inventories</h3>
                         <div class="d-inline-block">
-                            <h2 class="text-white">{{ @$Inventories }}</h2>
+                            <h2 class="text-white">{{ @$inventory }}</h2>
                             {{-- <p class="text-white mb-0">Jan - March 2019</p> --}}
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
@@ -81,6 +81,7 @@
 
                                         <th>ID</th>
                                         <th>Branch</th>
+                                        <th>Category</th>
                                         <th>Name</th>
                                         <th>Discription</th>
                                         <th>Quantity</th>
@@ -136,6 +137,15 @@
                                             <option selected disabled>Select Branch</option>
                                             @foreach ($branches as $branch)
                                                 <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                            @endforeach
+
+                                        </select>
+
+                                        <label class="control-label">Category</label>
+                                        <select name="category_id" id="category_id" class="form-select">
+                                            <option selected disabled>Select Category</option>
+                                            @foreach ($inventoryCategory as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
 
                                         </select>
@@ -213,6 +223,15 @@
                                             <option selected disabled>Select Branch</option>
                                             @foreach ($branches as $branch)
                                                 <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                            @endforeach
+
+                                        </select>
+
+                                        <label class="control-label">Category</label>
+                                        <select name="update_category_id" id="update_category_id" class="form-select">
+                                            <option selected disabled>Select Category</option>
+                                            @foreach ($inventoryCategory as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
 
                                         </select>
@@ -296,6 +315,10 @@
                     {
                         data: 'branch.name',
                         name: 'branch.name'
+                    },
+                    {
+                        data: 'category.name',
+                        name: 'category.name'
                     },
                     {
                         data: 'name',
@@ -411,6 +434,7 @@
                     $('#update_price').val(response.inventory.price);
                     $('#update_karat').val(response.inventory.karat);
                     $('#update_branch_id').val(response.inventory.branch_id);
+                    $('#update_category_id').val(response.inventory.category_id);
                 }
             });
         });
@@ -436,6 +460,7 @@
             var update_price = $('#update_price').val();
             var update_karat = $('#update_karat').val();
             var update_branch_id = $('#update_branch_id').val();
+            var update_category_id = $('#update_category_id').val();
 
             $('#update-message').text('Processing request, please wait...');
 
@@ -451,6 +476,7 @@
                     update_price: update_price,
                     update_karat: update_karat,
                     update_branch_id: update_branch_id,
+                    update_category_id: update_category_id,
                 },
                 success: function(response) {
                     $('#update-message').text('Update successful!');

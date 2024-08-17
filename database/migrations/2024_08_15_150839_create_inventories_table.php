@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('price')->nullable();
             $table->string('karat')->nullable();
             $table->string('branch_id')->nullable();
+            $table->string('category_id')->nullable();
 
             $table->timestamps();
         });

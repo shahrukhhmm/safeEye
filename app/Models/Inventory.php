@@ -13,4 +13,9 @@ class Inventory extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(InventoryCategory::class,'category_id','id');
+    }
 }

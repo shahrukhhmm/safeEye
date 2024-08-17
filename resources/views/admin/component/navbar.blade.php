@@ -26,6 +26,11 @@
                         <i class="icon-badge menu-icon"></i><span class="nav-text">Inventories</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('/inventoryCategory') }}" aria-expanded="false">
+                        <i class="icon-badge menu-icon"></i><span class="nav-text">Inventory Category </span>
+                    </a>
+                </li>
             @elseif ($roleId == 2)
                 <li>
                     <a href="{{ url('/dashboard') }}" aria-expanded="false">
