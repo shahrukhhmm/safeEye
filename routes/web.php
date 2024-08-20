@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\SubAdmin\SaleController;
 use App\Http\Controllers\Admin\InventoryController;
+use App\Http\Controllers\SubAdmin\AttendanceController;
 use App\Http\Controllers\Admin\InventoryCategoryController;
-
-
-
+use App\Http\Controllers\SuperAdmin\SaleController as SuperAdminSaleController;
 
 Route::redirect('/', '/dashboard');
 
@@ -24,6 +24,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/all-branch-sales', [SaleController::class, 'allBranchSales'])->name('branch.allSales');
+
 
 
     //================ user
@@ -61,10 +64,18 @@ Route::middleware(['auth'])->group(function () {
     // change the user to branch
 
 
+    Route::get('/branch-inventory-list', [BranchController::class, 'getBranchInventory'])->name('Branchinventory.list');
+
+    Route::get('/branch-sale-list', [BranchController::class, 'getBranchSale'])->name('Branchsale.list');
+
+
     Route::get('/branches-list', [BranchController::class, 'getBranch'])->name('branch.list');
 
     // add branch
     Route::post('/add-branch',       [BranchController::class, 'addBranch'])->name('branch.add');
+
+    // detail branch
+    Route::get('/branch-detail/{id}',  [BranchController::class, 'detailBranch'])->name('branch.detail');
 
     // edit branch
     Route::get('/edit-branch/{id}',  [BranchController::class, 'editBranch'])->name('branch.edit');
@@ -87,13 +98,13 @@ Route::middleware(['auth'])->group(function () {
 
      Route::get('/inventory-list', [InventoryController::class, 'getInventory'])->name('inventory.list');
 
-     // add branch
+     // add
      Route::post('/add-inventory', [InventoryController::class, 'addinventory'])->name('inventory.add');
 
-    //  // edit branch
+    //  // edit
      Route::get('/edit-inventory/{id}',[InventoryController::class, 'editinventory'])->name('inventory.edit');
 
-    //  // update branch
+    //  // update
      Route::post('/update-inventory', [InventoryController::class, 'updateinventory'])->name('inventory.update');
 
      Route::get('/inventory-delete/{id}', [InventoryController::class, 'deleteinventory'])->name('inventory.delete');
@@ -120,4 +131,36 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/update-inventoryCategory', [InventoryCategoryController::class, 'updateinventoryCategory'])->name('inventoryCategory.update');
 
     Route::get('/inventoryCategory-delete/{id}', [InventoryCategoryController::class, 'deleteinventoryCategory'])->name('inventoryCategory.delete');
+
+
+
+
+
+
+
+
+    // --------------=========Sub Admin
+
+
+    Route::get('/sales', [SaleController::class, 'index'])->name('sale.index');
+
+    Route::get('/invoice/{sale}', [SaleController::class, 'show'])->name('invoice.show');
+
+    Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
+
+
+
+
+    // =================== user attendance
+
+      // index
+      Route::get('/user-attendance', [AttendanceController::class,'index'])->name('user-attandace');
+
+      // load user data
+      Route::get('/user-dashboard-data', [AttendanceController::class,'loadData'])->name('load-data');
+
+
+
+
+
 });

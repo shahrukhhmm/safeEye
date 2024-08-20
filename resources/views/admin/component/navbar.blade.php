@@ -31,6 +31,16 @@
                         <i class="icon-badge menu-icon"></i><span class="nav-text">Inventory Category </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('/sales') }}" aria-expanded="false">
+                        <i class="icon-badge menu-icon"></i><span class="nav-text"> Sale</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/user-attendance') }}" aria-expanded="false">
+                        <i class="icon-badge menu-icon"></i><span class="nav-text"> User Attendance</span>
+                    </a>
+                </li>
             @elseif ($roleId == 2)
                 <li>
                     <a href="{{ url('/dashboard') }}" aria-expanded="false">
