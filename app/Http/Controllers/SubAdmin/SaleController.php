@@ -72,7 +72,8 @@ class SaleController extends Controller
 
 
         $pdf = Pdf::setOption(['isHtmlParserEnabled' => true,'isRemoteEnabled'=>true,'defaultFont' => 'sans-serif'])->loadView('admin.subAdmin.show', compact('sale'))->setPaper('A4', 'portrait');
-        return $pdf->download("pdfcard.pdf");
+
+        return $pdf->stream("pdfcard.pdf");
 
         // return view('admin.subAdmin.show', compact('sale'));
     }
