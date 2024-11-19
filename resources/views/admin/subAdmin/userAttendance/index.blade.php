@@ -61,7 +61,7 @@
                             <div class="container hide employee-container">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h1 class=" text-center welcome-text">Welcome {{$user->name}}</h1>
+                                        <h1 class=" text-center welcome-text">{{ __('SE.welcome') }} {{$user->name}}</h1>
                                     </div>
 
 
@@ -116,14 +116,14 @@
                                 </div>
 
                                 <div class="row mt-1">
-                                    <h3 class="text-center"> Last Seven day activity</h3>
+                                    <h3 class="text-center">{{ __('SE.last_seven_day_activity') }}</h3>
                                     <table class="table">
                                         <thead class="thead-dark">
                                             <tr>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Starting Time</th>
-                                                <th scope="col">End time</th>
-                                                <th scope="col">Total break time</th>
+                                                <th scope="col">{{ __('SE.date') }}</th>
+                                                <th scope="col">{{ __('SE.starting_time') }}</th>
+                                                <th scope="col">{{ __('SE.end_time') }}</th>
+                                                <th scope="col">{{ __('SE.total_break_time') }}</th>
                                           </tr>
                                         </thead>
                                         <tbody>

@@ -40,9 +40,14 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0" style="background-image: linear-gradient(
     rgba(255, 255, 255, 0.8),rgba(255, 255, 255, 0.8)),url('{{asset("images/logo/logo.png")}}'); background-position:top center;background-repeat:no-repeat">
-                            <div class="card-body pt-5">
+                            <div class="card-body pt-2">
+                                <div class=" d-flex justify-content-center mb-4" >
 
-                                    <a class="text-center" href="/"> <h4>SAFE EYE</h4></a>
+                                    <a class="text-center" href="/" >
+                                        <img src="{{asset("images/logo/logo.png")}}" alt="" width="150px" >
+                                        {{-- <h4>SAFE EYE</h4> --}}
+                                    </a>
+                                </div>
 
                                        <!-- Error Alert -->
                                 @if ($errors->any())
@@ -73,9 +78,12 @@
                                         <div class="form-group">
                                             <input type="password" name="password_confirmation" class="form-control bg-transparent" placeholder="Confirm Password" required>
                                         </div>
+                                        <div class="form-group">
+                                            <input type="text" name="phone" class="form-control bg-transparent" placeholder="Phone" required>
+                                        </div>
                                         <button type="submit" class="btn btn-primary">Register</button>
                                     </form>
-                                    <p>Already have an account? <a href="{{ route('login') }}">Login</a></p>
+                                    <p class="mt-2">Already have an account? <a href="{{ route('login') }}">Login</a></p>
                                 </div>
                             </div>
                         </div>

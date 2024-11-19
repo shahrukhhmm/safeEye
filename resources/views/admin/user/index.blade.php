@@ -12,7 +12,7 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-1">
                     <div class="card-body">
-                        <h3 class="card-title text-white">USER</h3>
+                        <h3 class="card-title text-white">{{ __('SE.users') }}</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">{{$users}}</h2>
                             {{-- <p class="text-white mb-0">Jan - March 2019</p> --}}
@@ -31,7 +31,7 @@
                     <div class="card-header">
                         <div  class="col-md-12" style="background:white;  display: flex;  flex-wrap: wrap; flex-direction: row; justify-content: space-between;">
 
-                            <p style="margin-top: 14px;"><i class="fa fa-user"></i>  <button class="btn btn-sm  btn-info ml-2 my-3 add" type="button">Add User</button></p>
+                            <p style="margin-top: 14px;"><i class="fa fa-user"></i>  <button class="btn btn-sm  btn-info ml-2 my-3 add" type="button">{{ __('SE.add_user') }}</button></p>
 
 
                             <form id="filter-form" style="display:flex; align-items:center;  flex-wrap: nowrap; justify-content: space-between; margin-bottom: 0px;">
@@ -55,7 +55,7 @@
 
                         @if (session()->has('message'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Success</strong> &nbsp; {{ session()->get('message') }}
+                                <strong>{{ __('SE.success') }}</strong> &nbsp; {{ session()->get('message') }}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -69,13 +69,14 @@
                                 <thead>
                                     <tr>
 
-                                        <th>ID</th>
-                                        <th>Branch</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
+                                        <th>{{ __('SE.id') }}</th>
+                                        <th>{{ __('SE.branches') }}</th>
+                                        <th>{{ __('SE.name') }}</th>
+                                        <th>{{ __('SE.email') }}</th>
+                                        <th>{{ __('SE.status') }}</th>
 
-                                        <th>Created at</th>
-                                        <th>Action</th>
+                                        <th>{{ __('SE.created_at') }}</th>
+                                        <th>{{ __('SE.action') }}</th>
 
                                     </tr>
                                 </thead>
@@ -103,7 +104,7 @@
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title text-dark" id="exampleModalLabel">Add User</h5>
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">{{ __('SE.add_user') }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -115,26 +116,35 @@
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="form-group col-md-12">
 
-                                    <label class="control-label">Branch</label>
+                                    <label class="control-label">{{ __('SE.branches') }}</label>
                                     <select name="branch_id" id="branch_id" class="form-select">
-                                        <option selected disabled>Select Branch</option>
+                                        <option selected disabled>{{ __('SE.select_branch') }}</option>
                                         @foreach ($branches as $branch)
                                             <option value="{{ $branch->id }}">{{ $branch->name }}</option>
                                         @endforeach
 
                                     </select>
 
-                                    <label class="control-label">Name</label>
+                                    <label class="control-label">{{ __('SE.name') }}</label>
                                     <input type="text" name="user_name" id="user_name" class="form-control" required>
-                                    <label class="control-label">Email</label>
+                                    <label class="control-label">{{ __('SE.email') }}</label>
                                     <input type="email" name="user_email" id="user_email" class="form-control" required>
-                                    <label class="control-label">Password</label>
+                                    <label class="control-label">{{ __('SE.password') }}</label>
                                     <input type="password" name="user_password" id="user_password" class="form-control" required>
+                                    <label class="control-label">{{ __('SE.status') }}</label>
+                                    <select name="user_status" id="user_status" class="form-select">
+
+                                        <option value="pending">Pending</option>
+                                        <option value="active">Active</option>
+                                        <option value="block">Block</option>
+
+
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Add</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">{{ __('SE.submit') }}</button>
+
                             </div>
                         </form>
                     </div>
@@ -152,7 +162,7 @@
             <div class="modal-content ">
 
                 <div class="modal-header d-flex justify-content-between">
-                    <h5 class="modal-title text-dark" id="exampleModalLabel">Edit User</h5>
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">{{ __('SE.edit_user') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -169,26 +179,36 @@
 
                         <div class="form-group col-md-12">
 
-                            <label class="control-label">Branch</label>
+                            <label class="control-label">{{ __('SE.branches') }}</label>
                             <select name="update_branch_id" id="update_branch_id" class="form-select">
-                                <option selected disabled>Select Branch</option>
+                                <option selected disabled>{{ __('SE.select_branch') }}</option>
                                 @foreach ($branches as $branch)
                                     <option value="{{ $branch->id }}">{{ $branch->name }}</option>
                                 @endforeach
 
                             </select>
 
-                                <label class="control-label">Name</label>
+                                <label class="control-label">{{ __('SE.name') }}</label>
                                 <input type="text" name="update_name" id="update_name" class="form-control">
 
-                                <label class="control-label">Email</label>
+                                <label class="control-label">{{ __('SE.email') }}</label>
                                 <input type="email" name="update_email" id="update_email" class="form-control">
 
+
+                                <label class="control-label">{{ __('SE.status') }}</label>
+                                <select name="update_status" id="update_status" class="form-select">
+
+                                    <option value="pending">Pending</option>
+                                    <option value="active">Active</option>
+                                    <option value="block">Block</option>
+
+
+                                </select>
 
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary float-lg-right " id="updateBtn">Submit</button>
+                    <button type="submit" class="btn btn-primary float-lg-right " id="updateBtn">{{ __('SE.submit') }}</button>
 
                 </div>
 
@@ -247,6 +267,10 @@
                     {
                         data: 'email',
                         name: 'email'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
                     },
                     {
                         data: 'created',
@@ -338,6 +362,7 @@
                     $('#update_name').val(response.user.name);
                     $('#update_branch_id').val(response.user.branch_id);
                     $('#update_email').val(response.user.email);
+                    $('#update_status').val(response.user.status);
 
                     // console.log(response);
                     // console.log(response.user.type);
@@ -362,6 +387,7 @@
 
             var name = $('#update_name').val();
             var email = $('#update_email').val();
+            var status = $('#update_status').val();
             var branch_id = $('#update_branch_id').val();
 
 
@@ -375,6 +401,7 @@
                     'userId': userId,
                     'name': name,
                     'email': email,
+                    'status': status,
                     'branch_id': branch_id,
 
                 },

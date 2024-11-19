@@ -12,7 +12,7 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-1">
                     <div class="card-body">
-                        <h3 class="card-title text-white">Inventory Categories</h3>
+                        <h3 class="card-title text-white">{{ __('SE.inventory_category') }}</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">{{ @$inventoryCategory }}</h2>
                             {{-- <p class="text-white mb-0">Jan - March 2019</p> --}}
@@ -33,7 +33,7 @@
                             style="background:white;  display: flex;  flex-wrap: wrap; flex-direction: row; justify-content: space-between;">
 
                             <p style="margin-top: 14px;"><i class="fa fa-user"></i> <button
-                                    class="btn btn-sm  btn-info ml-2 my-3 add" type="button">Add Inventory Category</button></p>
+                                    class="btn btn-sm  btn-info ml-2 my-3 add" type="button">{{ __('SE.add') }}</button></p>
 
 
                             <form id="filter-form"
@@ -61,7 +61,7 @@
 
                         @if (session()->has('message'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Success</strong> &nbsp;
+                                <strong>{{ __('SE.success') }}</strong> &nbsp;
 
                                 {{ session()->get('message') }}
 
@@ -79,11 +79,11 @@
                                 <thead>
                                     <tr>
 
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Created at</th>
-                                        <th>Action</th>
+                                        <th>{{ __('SE.id') }}</th>
+                                        <th>{{ __('SE.name') }}</th>
+                                        <th>{{ __('SE.description') }}</th>
+                                        <th>{{ __('SE.created_at') }}</th>
+                                        <th>{{ __('SE.action') }}</th>
 
                                     </tr>
                                 </thead>
@@ -111,7 +111,7 @@
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title text-dark" id="exampleModalLabel">Add Inventory Category</h5>
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">{{ __('SE.add') }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -128,11 +128,11 @@
 
 
 
-                                        <label class="control-label">Name</label>
+                                        <label class="control-label">{{ __('SE.name') }}</label>
                                         <input type="name" name="name" id="name" class="form-control"
                                             required>
 
-                                        <label class="control-label">Description</label>
+                                        <label class="control-label">{{ __('SE.description') }}</label>
                                         <input type="text" name="description" id="description" class="form-control"
                                             required>
 
@@ -142,8 +142,8 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Add</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">{{ __('SE.add') }}</button>
+
                             </div>
                         </form>
                     </div>
@@ -162,7 +162,7 @@
                 <div class="modal-content ">
 
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title text-dark" id="exampleModalLabel">Edit Inventory Category</h5>
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">{{ __('SE.edit') }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -184,10 +184,10 @@
                                         class="form-control">
 
 
-                                    <label class="control-label">Name</label>
+                                    <label class="control-label">{{ __('SE.name') }}</label>
                                     <input type="text" name="update_name" id="update_name" class="form-control">
 
-                                    <label class="control-label">Description</label>
+                                    <label class="control-label">{{ __('SE.description') }}</label>
                                     <input type="text" name="update_description" id="update_description"
                                         class="form-control">
 
@@ -197,7 +197,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary float-lg-right " id="updateBtn">Submit</button>
+                        <button type="submit" class="btn btn-primary float-lg-right " id="updateBtn">{{ __('SE.submit') }}</button>
 
                     </div>
 

@@ -12,7 +12,7 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-1">
                     <div class="card-body">
-                        <h3 class="card-title text-white">Branch</h3>
+                        <h3 class="card-title text-white">{{ __('SE.branches') }}</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">{{ @$branch }}</h2>
                             {{-- <p class="text-white mb-0">Jan - March 2019</p> --}}
@@ -33,7 +33,7 @@
                             style="background:white;  display: flex;  flex-wrap: wrap; flex-direction: row; justify-content: space-between;">
 
                             <p style="margin-top: 14px;"><i class="fa fa-user"></i> <button
-                                    class="btn btn-sm  btn-info ml-2 my-3 add" type="button">Add Branch</button></p>
+                                    class="btn btn-sm  btn-info ml-2 my-3 add" type="button">{{ __('SE.add_branch') }}</button></p>
 
 
                             <form id="filter-form"
@@ -61,7 +61,7 @@
 
                         @if (session()->has('message'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Success</strong> &nbsp;
+                                <strong>{{ __('SE.success') }}</strong> &nbsp;
 
                                 {{ session()->get('message') }}
 
@@ -79,12 +79,12 @@
                                 <thead>
                                     <tr>
 
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
+                                        <th>{{ __('SE.id') }}</th>
+                                        <th>{{ __('SE.name') }}</th>
+                                        <th>{{ __('SE.address') }}</th>
 
-                                        <th>Created at</th>
-                                        <th>Action</th>
+                                        <th>{{ __('SE.created_at') }}</th>
+                                        <th>{{ __('SE.action') }}</th>
 
                                     </tr>
                                 </thead>
@@ -112,7 +112,7 @@
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title text-dark" id="exampleModalLabel">Add Branch</h5>
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">{{ __('SE.add_branch') }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -127,10 +127,10 @@
                                 <div class="row d-flex justify-content-center align-items-center">
                                     <div class="form-group col-md-12">
 
-                                        <label class="control-label">Name</label>
+                                        <label class="control-label">{{ __('SE.name') }}</label>
                                         <input type="name" name="name" id="name" class="form-control"
                                             required>
-                                        <label class="control-label">Address</label>
+                                        <label class="control-label">{{ __('SE.address') }}</label>
                                         <input type="text" name="address" id="address" class="form-control"
                                             required>
                                     </div>
@@ -138,8 +138,8 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Add</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">{{ __('SE.submit') }}</button>
+
                             </div>
                         </form>
                     </div>
@@ -158,7 +158,7 @@
                 <div class="modal-content ">
 
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title text-dark" id="exampleModalLabel">Edit Branch</h5>
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">{{ __('SE.add_branch') }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -175,17 +175,17 @@
 
                             <div class="form-group col-md-12">
 
-                                <label class="control-label">Name</label>
+                                <label class="control-label">{{ __('SE.name') }}</label>
                                 <input type="text" name="update_name" id="update_name" class="form-control">
 
-                                <label class="control-label">Address</label>
+                                <label class="control-label">{{ __('SE.address') }}</label>
                                 <input type="text" name="update_address" id="update_address" class="form-control">
 
 
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary float-lg-right " id="updateBtn">Submit</button>
+                        <button type="submit" class="btn btn-primary float-lg-right " id="updateBtn">{{ __('SE.submit') }}</button>
 
                     </div>
 

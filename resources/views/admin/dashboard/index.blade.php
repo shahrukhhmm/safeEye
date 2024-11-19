@@ -7,18 +7,18 @@
 <!--**********************************
             Content body start
         ***********************************-->
-<div class="content-body">
+<div class="content-body" ">
 
     <div class="container-fluid mt-3">
 
         <div class="row">
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-1">
-                    <div class="card-body">
-                        <h3 class="card-title text-white">Users</h3>
+                    <div class="card-body" >
+                        <h3 class="card-title text-white">{{ __('SE.users') }}</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">{{$user}}</h2>
-                           <a class="m-0 p-0" href="{{url('/user')}}"> <p class="text-white mb-0">User <i class="fa-solid fa-arrow-right m-2"></i></p></a>
+                           <a class="m-0 p-0" href="{{url('/user')}}"> <p class="text-white mb-0">{{ __('SE.users') }} <i class="fa-solid fa-arrow-right m-2"></i></p></a>
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
                     </div>
@@ -27,10 +27,10 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-2">
                     <div class="card-body">
-                        <h3 class="card-title text-white">Branches</h3>
+                        <h3 class="card-title text-white">{{ __('SE.branches') }}</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">{{$branch}}</h2>
-                            <a href="{{url('/branch')}}"><p class="text-white mb-0">Branches <i class="fa-solid fa-arrow-right m-2"></i></p></a>
+                            <a href="{{url('/branch')}}"><p class="text-white mb-0">{{ __('SE.branches') }} <i class="fa-solid fa-arrow-right m-2"></i></p></a>
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa-solid fa-code-branch"></i></span>
                     </div>
@@ -39,10 +39,10 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-3">
                     <div class="card-body">
-                        <h3 class="card-title text-white">Inventory</h3>
+                        <h3 class="card-title text-white">{{ __('SE.inventory') }}</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">{{$inventory}}</h2>
-                            <a href="{{url("/inventory")}}"><p class="text-white mb-0">Inventory <i class="fa-solid fa-arrow-right m-2"></i></p></a>
+                            <a href="{{url("/inventory")}}"><p class="text-white mb-0">{{ __('SE.inventory') }} <i class="fa-solid fa-arrow-right m-2"></i></p></a>
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa-solid fa-warehouse"></i></span>
                     </div>
@@ -51,10 +51,10 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-4">
                     <div class="card-body">
-                        <h3 class="card-title text-white">Inventory Category</h3>
+                        <h3 class="card-title text-white">{{ __('SE.inventory_category') }}</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">{{$category}}</h2>
-                            <a href="{{url('/inventoryCategory')}}"><p class="text-white mb-0">Inventory Category <i class="fa-solid fa-arrow-right m-2"></i></p></a>
+                            <a href="{{url('/inventoryCategory')}}"><p class="text-white mb-0">{{ __('SE.inventory_category') }} <i class="fa-solid fa-arrow-right m-2"></i></p></a>
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa-solid fa-layer-group"></i></span>
                     </div>
@@ -62,13 +62,13 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" >
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card" >
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-6" >
                                     {{-- <h3>Inventory by Category</h3> --}}
                                     <div id="categoryInventoryChart" style="height: 370px; width: 100%;"></div>
                                 </div>
@@ -119,7 +119,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="row p-5">
-                                <h1 class="text-center mt-5 display-5" style=" margin: 25px; color: #252424; font-family: sans-serif;" >Today Attendance</h1>
+                                <h1 class="text-center mt-5 display-5" style=" margin: 25px; color: #252424; font-family: sans-serif;" >{{ __('SE.today_attendance') }}</h1>
 
                                 <div class="col-lg-4 col-md-6 col-sm-12" style="box-shadow: rgb(149 157 165 / 10%) 0px 8px 24px; margin-top: 20px; padding: 15px; border-radius: 25px;">
                                     <div class="small-box" style="background: white;">
@@ -130,7 +130,7 @@
                                                 </i>
                                             </div>
                                             <div class="inner mx-3">
-                                                <p class="card-heading" style="font-size: 15px;">Logged-in Users</p>
+                                                <p class="card-heading" style="font-size: 15px;">{{ __('SE.logged_in_user') }}</p>
                                                 <h3 class="card-text">{{@$numEmployeesStarted}}</h3>
                                             </div>
 
@@ -150,7 +150,7 @@
                                                 </i>
                                             </div>
                                             <div class="inner mx-3">
-                                                <p class="card-heading" style="font-size: 15px;">On Break Users</p>
+                                                <p class="card-heading" style="font-size: 15px;">{{ __('SE.on_break_user') }}</p>
                                                 <h3 class="card-text">{{@$numEmployeesOnBreak}}</h3>
                                             </div>
 
@@ -169,7 +169,7 @@
                                                 </i>
                                             </div>
                                             <div class="inner mx-3">
-                                                <p class="card-heading" style="font-size: 15px;">Logged out Users</p>
+                                                <p class="card-heading" style="font-size: 15px;">{{ __('SE.logged_out_user') }}</p>
                                                 <h3 class="card-text">{{@$numEmployeesEnded}}</h3>
                                             </div>
 
@@ -191,11 +191,11 @@
                                     <table class="table " >
                                         <thead>
                                             <tr>
-                                            <th scope="col" style="color: black; font-weight: 500; background-color: #0000001c;">Name</th>
-                                            <th scope="col" style="color: black; font-weight: 500; background-color: #0000001c;">Location</th>
-                                            <th scope="col" style="color: black; font-weight: 500; background-color: #0000001c;">Login time</th>
-                                            <th scope="col" style="color: black; font-weight: 500; background-color: #0000001c;">Logout time</th>
-                                            <th scope="col" style="color: black; font-weight: 500; background-color: #0000001c;">Break</th>
+                                            <th scope="col" style="color: black; font-weight: 500; background-color: #0000001c;">{{ __('SE.name') }}</th>
+                                            <th scope="col" style="color: black; font-weight: 500; background-color: #0000001c;">{{ __('SE.location') }}</th>
+                                            <th scope="col" style="color: black; font-weight: 500; background-color: #0000001c;">{{ __('SE.login_time') }}</th>
+                                            <th scope="col" style="color: black; font-weight: 500; background-color: #0000001c;">{{ __('SE.logout_time') }}</th>
+                                            <th scope="col" style="color: black; font-weight: 500; background-color: #0000001c;">{{ __('SE.break') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -246,7 +246,7 @@
             animationEnabled: true,
             theme: "light2",
             title:{
-                text: "Inventory by Category"
+                text: "{{ __('SE.inventory_by_category') }}"
             },
             data: [{
                 type: "doughnut",
@@ -265,7 +265,7 @@
             animationEnabled: true,
             theme: "light1",
             title:{
-                text: "Inventory by Branch"
+                text: "{{ __('SE.inventory_by_branch') }}"
             },
             data: [{
                 type: "pie",
@@ -284,22 +284,22 @@
             animationEnabled: true,
             theme: "light2",
             title:{
-                text: "Total Sales and Quantity Sold by Branch"
+                text: "{{ __('SE.total_sales_and_quantity_sold_by_branch') }}"
             },
             axisX: {
-                title: "Branches"
+                title: "{{ __('SE.branches') }}"
             },
             axisY: [{
-                title: "Total Sales (USD)",
+                title: "{{ __('SE.total_sales') }}",
                 beginAtZero: true
             },{
-                title: "Total Quantity Sold",
+                title: "{{ __('SE.total_quantity_sold') }}",
                 beginAtZero: true,
                 opposite: true
             }],
             data: [{
                 type: "column",
-                name: "Total Sales",
+                name: "{{ __('SE.total_sales') }}",
                 showInLegend: true,
                 yValueFormatString: "$#,##0",
                 dataPoints: [
@@ -309,7 +309,7 @@
                 ]
             },{
                 type: "line",  // This could also be "spline", "column", etc.
-                name: "Total Quantity Sold",
+                name: "{{ __('SE.total_quantity_sold') }}",
                 axisYType: "secondary",
                 showInLegend: true,
                 yValueFormatString: "#,##0 units",
@@ -326,13 +326,13 @@
             animationEnabled: true,
             theme: "light2",
             title: {
-                text: "Total Quantity Sold by Category"
+                text: "{{ __('SE.total_quantity_sold_by_category') }}"
             },
             axisX: {
-                title: "Categories"
+                title: "{{ __('SE.categories') }}"
             },
             axisY: {
-                title: "Total Quantity Sold",
+                title: "{{ __('SE.total_quantity_sold') }}",
                 beginAtZero: true
             },
             data: [{

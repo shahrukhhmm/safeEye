@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+use Barryvdh\Snappy\Facades\SnappyImage;
 
 class SaleController extends Controller
 {
@@ -18,7 +20,7 @@ class SaleController extends Controller
     {
         $user = Auth::user();
         $inventories = Inventory::where('branch_id',$user->branch_id)->get();
-        return view('admin.subAdmin.index',compact('inventories'));
+        return view('admin.subAdmin.index',compact('inventories','user'));
     }
 
 
@@ -33,34 +35,50 @@ class SaleController extends Controller
 
         $user = Auth::user();
 
+        $original_total_price = 0;
+        $total_vat = 0;
+
+        foreach ($request->quantities as $index => $quantity) {
+            $price = $request->prices[$index];
+            $subtotal = $quantity * $price;
+            $vat = $subtotal * 0.15;
+
+            $original_total_price += $subtotal;
+            $total_vat += $vat;
+        }
+
+        $total_price_with_vat = $original_total_price + $total_vat;
+
         $saleId = Sale::insertGetId([
             'buyer_name' => $request->buyer_name,
             'branch_id' => $user->branch_id,
-            'total_price' => array_sum(array_map(function($qty, $price) {
-                return $qty * $price;
-            }, $request->quantities, $request->prices)),
+            'price' => $original_total_price,
+            'total_price' => $total_price_with_vat,
             'created_at' => now(),
         ]);
 
         foreach ($request->inventory_ids as $index => $inventory_id) {
             $quantity_sold = $request->quantities[$index];
             $price = $request->prices[$index];
+            $subtotal = $quantity_sold * $price;
+            $vat = $subtotal * 0.15; // Calculate VAT
+            $total_price_with_vat = $subtotal + $vat;
+
 
             SaleItem::insertGetId([
                 'sale_id' => $saleId,
                 'inventory_id' => $inventory_id,
                 'quantity_sold' => $quantity_sold,
-                'price' => $price,
+                'price' => $subtotal,
+                'vat' => $vat,
                 'created_at' => now(),
             ]);
 
+            // Update inventory
             $inventory = Inventory::find($inventory_id);
             $inventory->quantity -= $quantity_sold;
             $inventory->save();
         }
-
-
-
 
         return redirect()->route('invoice.show', $saleId);
     }
@@ -68,13 +86,17 @@ class SaleController extends Controller
 
     public function show($id)
     {
-        $sale = Sale::with('saleItems.inventory')->findOrFail($id);
+        $sale = Sale::with('saleItems.inventory' , 'branch', 'user')->findOrFail($id);
 
+        // dd($sale->user->name);
 
-        $pdf = Pdf::setOption(['isHtmlParserEnabled' => true,'isRemoteEnabled'=>true,'defaultFont' => 'sans-serif'])->loadView('admin.subAdmin.show', compact('sale'))->setPaper('A4', 'portrait');
+        return view('admin.subAdmin.show', compact('sale'));
 
-        return $pdf->stream("pdfcard.pdf");
+        // $pdf = Pdf::setOption(['isHtmlParserEnabled' => true,'isRemoteEnabled'=>true,'defaultFont' => 'sans-serif'])->loadView('admin.subAdmin.show', compact('sale'))->setPaper('A4', 'landscape');
+
+        // return $pdf->stream("pdfcard.pdf");
 
         // return view('admin.subAdmin.show', compact('sale'));
     }
+
 }

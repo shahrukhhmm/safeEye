@@ -12,7 +12,7 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-1">
                     <div class="card-body">
-                        <h3 class="card-title text-white">Inventories</h3>
+                        <h3 class="card-title text-white">{{ __('SE.inventories') }}</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">{{ @$inventory }}</h2>
                             {{-- <p class="text-white mb-0">Jan - March 2019</p> --}}
@@ -33,7 +33,7 @@
                             style="background:white;  display: flex;  flex-wrap: wrap; flex-direction: row; justify-content: space-between;">
 
                             <p style="margin-top: 14px;"><i class="fa fa-user"></i> <button
-                                    class="btn btn-sm  btn-info ml-2 my-3 add" type="button">Add Inventory</button></p>
+                                    class="btn btn-sm  btn-info ml-2 my-3 add" type="button">{{ __('SE.add_inventory') }}</button></p>
 
 
                             <form id="filter-form"
@@ -61,7 +61,7 @@
 
                         @if (session()->has('message'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Success</strong> &nbsp;
+                                <strong>{{ __('SE.success') }}</strong> &nbsp;
 
                                 {{ session()->get('message') }}
 
@@ -79,17 +79,18 @@
                                 <thead>
                                     <tr>
 
-                                        <th>ID</th>
-                                        <th>Branch</th>
-                                        <th>Category</th>
-                                        <th>Name</th>
-                                        <th>Discription</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
-                                        <th>Karat</th>
 
-                                        <th>Created at</th>
-                                        <th>Action</th>
+                                        <th>{{ __('SE.id') }}</th>
+                                        <th>{{ __('SE.branches') }}</th>
+                                        <th>{{ __('SE.category') }}</th>
+                                        <th>{{ __('SE.name') }}</th>
+                                        <th>{{ __('SE.description') }}</th>
+                                        <th>{{ __('SE.quantity') }}</th>
+                                        <th>{{ __('SE.price') }}</th>
+                                        <th>{{ __('SE.karat') }}</th>
+
+                                        <th>{{ __('SE.created_at') }}</th>
+                                        <th>{{ __('SE.action') }}</th>
 
                                     </tr>
                                 </thead>
@@ -117,7 +118,7 @@
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title text-dark" id="exampleModalLabel">Add Inventory</h5>
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">{{ __('SE.sold_items') }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -132,41 +133,41 @@
                                 <div class="row d-flex justify-content-center align-items-center">
                                     <div class="form-group col-md-12">
 
-                                        <label class="control-label">Branch</label>
+                                        <label class="control-label">{{ __('SE.branch') }}</label>
                                         <select name="branch_id" id="branch_id" class="form-select">
-                                            <option selected disabled>Select Branch</option>
+                                            <option selected disabled>{{ __('SE.select_branch') }}</option>
                                             @foreach ($branches as $branch)
                                                 <option value="{{ $branch->id }}">{{ $branch->name }}</option>
                                             @endforeach
 
                                         </select>
 
-                                        <label class="control-label">Category</label>
+                                        <label class="control-label">{{ __('SE.category') }}</label>
                                         <select name="category_id" id="category_id" class="form-select">
-                                            <option selected disabled>Select Category</option>
+                                            <option selected disabled>{{ __('SE.select_category') }}</option>
                                             @foreach ($inventoryCategory as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
 
                                         </select>
 
-                                        <label class="control-label">Name</label>
+                                        <label class="control-label">{{ __('SE.name') }}</label>
                                         <input type="name" name="name" id="name" class="form-control"
                                             required>
 
-                                        <label class="control-label">Description</label>
+                                        <label class="control-label">{{ __('SE.description') }}</label>
                                         <input type="text" name="description" id="description" class="form-control"
                                             required>
 
-                                        <label class="control-label">Quantity</label>
+                                        <label class="control-label">{{ __('SE.quantity') }}</label>
                                         <input type="text" name="quantity" id="quantity" class="form-control"
                                             required>
 
-                                        <label class="control-label">Price</label>
+                                        <label class="control-label">{{ __('SE.price') }}</label>
                                         <input type="text" name="price" id="price" class="form-control"
                                             required>
 
-                                        <label class="control-label">Karat</label>
+                                        <label class="control-label">{{ __('SE.karat') }}</label>
                                         <input type="text" name="karat" id="karat" class="form-control"
                                             required>
 
@@ -176,8 +177,8 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Add</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">{{ __('SE.submit') }}</button>
+
                             </div>
                         </form>
                     </div>
@@ -196,7 +197,7 @@
                 <div class="modal-content ">
 
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title text-dark" id="exampleModalLabel">Edit Inventory</h5>
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">{{ __('SE.edit') }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -218,41 +219,41 @@
                                     <input type="hidden" name="inventory_id" id="inventory_id"
                                         class="form-control">
 
-                                        <label class="control-label">Branch</label>
+                                        <label class="control-label">{{ __('SE.branch') }}</label>
                                         <select name="update_branch_id" id="update_branch_id" class="form-select">
-                                            <option selected disabled>Select Branch</option>
+                                            <option selected disabled>{{ __('SE.select_branch') }}</option>
                                             @foreach ($branches as $branch)
                                                 <option value="{{ $branch->id }}">{{ $branch->name }}</option>
                                             @endforeach
 
                                         </select>
 
-                                        <label class="control-label">Category</label>
+                                        <label class="control-label">{{ __('SE.category') }}</label>
                                         <select name="update_category_id" id="update_category_id" class="form-select">
-                                            <option selected disabled>Select Category</option>
+                                            <option selected disabled>{{ __('SE.select_category') }}</option>
                                             @foreach ($inventoryCategory as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
 
                                         </select>
 
-                                    <label class="control-label">Name</label>
+                                    <label class="control-label">{{ __('SE.name') }}</label>
                                     <input type="text" name="update_name" id="update_name" class="form-control">
 
-                                    <label class="control-label">Description</label>
+                                    <label class="control-label">{{ __('SE.description') }}</label>
                                     <input type="text" name="update_description" id="update_description"
                                         class="form-control">
 
-                                    <label class="control-label">Quantity</label>
+                                    <label class="control-label">{{ __('SE.quantity') }}</label>
                                     <input type="text" name="update_quantity" id="update_quantity"
                                         class="form-control">
 
-                                    <label class="control-label">Price</label>
+                                    <label class="control-label">{{ __('SE.price') }}</label>
                                     <input type="text" name="update_price" id="update_price"
                                         class="form-control">
 
 
-                                    <label class="control-label">Karat</label>
+                                    <label class="control-label">{{ __('SE.karat') }}</label>
                                     <input type="text" name="update_karat" id="update_karat"
                                         class="form-control">
 
@@ -264,7 +265,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary float-lg-right " id="updateBtn">Submit</button>
+                        <button type="submit" class="btn btn-primary float-lg-right " id="updateBtn">{{ __('SE.submit') }}</button>
 
                     </div>
 

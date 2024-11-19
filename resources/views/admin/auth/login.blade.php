@@ -41,11 +41,17 @@
                     <div class="form-input-content" >
                         <div class="card login-form mb-0" style="background-image: linear-gradient(
     rgba(255, 255, 255, 0.8),rgba(255, 255, 255, 0.8)),url('{{asset("images/logo/logo.png")}}'); background-position:top center;background-repeat:no-repeat">
-                            <div class="card-body pt-5">
-                                <a class="text-center" href="/"> <h4>SAFE EYE</h4></a>
+                            <div class="card-body pt-2 " >
+                                <div class=" d-flex justify-content-center" >
+
+                                    <a class="text-center" href="/" >
+                                        <img src="{{asset("images/logo/logo.png")}}" alt="" width="150px" >
+                                        {{-- <h4>SAFE EYE</h4> --}}
+                                    </a>
+                                </div>
 
                                 @if ($errors->any())
-                                    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="position:fixed; top:15px; right:15px; z-index:10">
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="">
                                         <ul>
                                             @foreach ($errors->all() as $error)
                                                 <li>{{ $error }}</li>
@@ -60,16 +66,19 @@
 
                                 <form method="POST" action="{{ route('login.post') }}">
                                     @csrf
-                                    <div class="form-group">
+                                    <div class="form-group pt-4">
+                                        <label for="email" >Email</label>
                                         <input type="email" name="email" class="form-control bg-transparent
-                                        " placeholder="Email" required>
+                                        " placeholder="{{ __('SE.email') }}" required>
                                 </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" class="form-control bg-transparent" placeholder="Password" required>
+                                    <div class="form-group pb-4">
+                                        <label for="email" >Password</label>
+
+                                        <input type="password" name="password" class="form-control bg-transparent" placeholder="{{ __('SE.password') }}" required>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <input type="submit" class="btn btn-primary form-control" value="Login">
                                 </form>
-                                <p> Don't have an account? <a class="btn  border-0" href="{{ route('register') }}">Register</a></p>
+                                <p class="mt-2"> Don't have an account? <a class="btn  border-0 " href="{{ route('register') }}">Register</a></p>
                             </div>
                         </div>
                     </div>

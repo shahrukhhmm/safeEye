@@ -74,6 +74,7 @@ class UserController extends Controller
             'email' => $req->user_email,
             'password' => $hashedPassword,
             'branch_id' => $req->branch_id,
+            'status' => $req->status,
             'role_id' => 2,
             'created_at' => now(),
 
@@ -104,6 +105,7 @@ class UserController extends Controller
         $user->name = $req->name;
 
         $user->email = $req->email;
+        $user->status = $req->status;
         $user->branch_id = $req->branch_id;
 
         if($req->password != null){

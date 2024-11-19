@@ -18,6 +18,7 @@ class AttendanceController extends Controller
 
         $user = User::where('id',$userId)->first();
 
+
         $todayDate = Carbon::now()->toDateString();
 
         $startData = UserAttandance::where('user_id', $userId)

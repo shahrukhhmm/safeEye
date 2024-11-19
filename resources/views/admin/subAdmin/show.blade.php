@@ -1,381 +1,304 @@
-{{-- @include('admin.component.header') --}}
-{{-- @include('admin.component.style') --}}
-{{-- @include('admin.component.topnav')
-@include('admin.component.navbar') --}}
-
-
-
-{{-- <div class="content-body">
-    <div class="container-fluid mt-3">
-        <h1>Invoice for Sale #{{ $sale->id }}</h1>
-        <p>Buyer: {{ $sale->buyer_name }}</p> --}}
-{{-- <p>Date: {{ $sale->created_at->format('Y-m-d H:i') }}</p> --}}
-
-{{-- <table class="table">
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($sale->saleItems as $item)
-                    <tr>
-                        <td>{{ $item->inventory->name }}</td>
-                        <td>{{ $item->quantity_sold }}</td>
-                        <td>{{ $item->price }} USD</td>
-                        <td>{{ $item->quantity_sold * $item->price }} USD</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        <p>Total Amount: {{ $sale->total_price }} USD</p>
-
-
-
-    </div>
-</div> --}}
-
-{{-- @include('admin.component.footer') --}}
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<meta charset="UTF-8">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safe-Eye</title>
-    <style>
+    <title></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+
+    <style type="text/css">
+        /* @font-face {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            src: url('/Lato/Lato-Regular.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            src: url('/Lato/Lato-Bold.ttf') format('truetype');
+        } */
+
         * {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            /* font-family: 'Lato'; */
+            letter-spacing: .8px;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-family: 'DejaVu Sans', sans-serif;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            padding: 0;
+        p {
             margin: 0;
+            padding: 0;
         }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: white;
-            padding: 20px 40px;
-            /* Adjusted padding */
-            color: grey;
-            position: relative;
+        .ft10 {
+            font-size: 10px;
+            color: #000000;
         }
 
-        .nav-logo {
-            flex-shrink: 0;
+        .ft11 {
+            font-size: 11px;
+            color: #000000;
         }
 
-        .nav-logo img {
-            width: 150px;
-            /* Adjusted size */
-            height: auto;
+        .ft12 {
+            font-size: 12px;
+            color: #000000;
         }
 
-        .nav-links {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+        .ft13 {
+            font-size: 13px;
+            color: #000000;
         }
 
-        .nav-links ul {
-            list-style: none;
-            margin-bottom: 10px;
-            display: flex;
-            gap: 15px;
+        .ft14 {
+            font-size: 14px;
+            color: #000000;
         }
 
-        .nav-links li {
-            font-size: 18px;
-            color: grey;
-            font-weight: bold;
-        }
-
-        .navbar::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 40px;
-            /* Align with padding */
-            right: 40px;
-            /* Align with padding */
-            height: 2px;
-            background-color: lightgrey;
-        }
-
-        .qr-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            /* Adjusted padding */
-            color: grey;
-        }
-
-        .qr-section .qr-code {
-            flex-shrink: 0;
-        }
-
-        .qr-section .qr-code img {
-            width: 120px;
-            /* Adjusted size */
-            height: auto;
-        }
-
-        .qr-section .qr-content {
-            display: flex;
-            flex-direction: column;
-            margin-left: 20px;
-        }
-
-        .qr-content .row {
-            margin-bottom: 10px;
+        .ft15 {
             font-size: 15px;
-            font-weight: bold;
+            /* line-height: 12px; */
+            color: #000000;
         }
 
-        .invoice-dates {
-            text-align: center;
-            padding: 10px 40px;
-            /* Adjusted padding */
-            font-size: 16px;
-            font-weight: bold;
-            color: grey;
+        .ft25 {
+            font-size: 23px;
+            /* line-height: 12px; */
+            color: #000000;
         }
 
-        .table-wrapper {
+        .page {
+            width: 1123px;
+            height:794px;
+            margin: 0 auto;
+            background: white;
             position: relative;
-            padding: 20px 40px;
-            /* Adjusted padding */
         }
 
         table {
-            width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid grey;
-        }
-
-        th,
-        td {
-            padding: 10px;
-            text-align: center;
         }
 
         th {
-            background-color: #f2f2f2;
+            color: #3496AF;
+            padding: 5px;
         }
+        /* @font-face {
+            font-family: "Amiri", serif;
+            font-weight: 400;
+            font-style: normal;
+        } */
 
-        .line-below {
-            position: absolute;
-            bottom: -20px;
-            left: 0;
-            /* Align with padding */
-            right: 0;
-            /* Align with padding */
-            height: 2px;
-            background-color: lightgrey;
-        }
+        /* .arabic-text {
+            font-family: "Amiri", serif;
+            font-weight: 400;
+            font-style: normal;
+        } */
 
-        .footer {
-            text-align: center;
-            padding: 20px 40px;
-            /* Adjusted padding */
-            color: grey;
-            margin-top: 30px;
-        }
-
-        .footer div {
-            margin-bottom: 5px;
-        }
-
-        @media print {
-            body {
-                margin: 0;
-                padding: 0;
-            }
-
-            .navbar,
-            .qr-section,
-            .invoice-dates,
-            .table-wrapper,
-            .footer {
-                page-break-inside: avoid;
-            }
-
-            .line-below {
-                display: none;
-                /* Hide the line below the table in print */
-            }
-
-            .footer {
-                margin-top: 20px;
-                /* Adjust footer margin for print */
-            }
-        }
-
-        @media (max-width: 600px) {
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 20px;
-                /* Adjusted padding */
-            }
-
-            .nav-links {
-                align-items: flex-start;
-                width: 100%;
-                margin-top: 20px;
-            }
-
-            .nav-links ul {
-                flex-direction: column;
-                width: 100%;
-                gap: 0;
-            }
-
-            .nav-links li {
-                display: block;
-                width: 100%;
-            }
-
-            .navbar::after {
-                width: calc(100% - 40px);
-                /* Adjust underline for smaller screens */
-                left: 20px;
-                /* Adjusted alignment */
-                right: 20px;
-                /* Adjusted alignment */
-            }
-
-            .qr-section {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 20px;
-            }
-
-            .qr-section .qr-content {
-                margin-top: 20px;
-            }
-
-            .table-wrapper {
-                padding: 20px;
-            }
-
-            .line-below {
-                left: 20px;
-                right: 20px;
-            }
-
-            .footer {
-                padding: 10px;
-                margin-top: 20px;
-                /* Adjust margin for smaller screens */
-            }
-        }
     </style>
+
 </head>
 
-<body>
-    <nav class="navbar">
-        <div class="nav-logo">
-            <img src="logo.png" alt="Not Found">
-        </div>
-        <div class="nav-links">
-            <ul>
-                <li>SAFE EYE TRADING</li>
-            </ul>
-            <ul>
-                <li>Arabic Section</li>
-            </ul>
-            <ul>
-                <li>RIYADH 12831 Saudi Arabia</li>
-            </ul>
-        </div>
-    </nav>
+<body bgcolor="white" vlink="blue" link="blue">
 
-    <section class="qr-section">
-        <div class="qr-code">
-            <img src="QR.jfif" alt="Not Found">
-        </div>
-        <div class="qr-content">
-            <div class="row">LEZOF COMPANY LTD.</div>
-            <div class="row">VAT Number: 310294957900003</div>
-        </div>
-    </section>
+    <div class="page">
 
-    <!-- Invoice Dates Section -->
-    <section class="invoice-dates">
-        <div>Invoice Date: 04/05/2024</div>
-        <div>Delivery Date: 04/05/2024</div>
-    </section>
+        <h2 style="color: gray; position: absolute; top:20px;left:20px;">SAFE EYES TRADING</h2>
+        <h4 style="color: gray; position: absolute; top:60px;left:20px;">Gold & Jewellery</h4>
 
-    <!-- Table Section -->
-    <section class="table-wrapper">
-        <table>
-            <thead>
+
+        <div style="position: absolute; top:10px;left:40%; width:200px">
+            <img src="{{asset('/images/logo/logo.png')}}" alt="Not Found" width="100%">
+        </div>
+
+
+
+        <h3 style="color: gray; position: absolute; top:20px;right:20px;">SAFE EYES TRADING</h3>
+        <p class="ft13" style=" position: absolute; top:45px;right:20px;">مؤسسة العيون الامنة </p>
+        <p class="ft13" style=" position: absolute; top:65px;right:20px;">alazizyah </p>
+        <p class="ft13" style=" position: absolute; top:90px;right:20px;">RIYADH 12831</p>
+        <p class="ft13" style=" position: absolute; top:110px;right:20px;"> Saudi Arabia</p>
+
+        <div style="position: absolute; top: 145px; left: 0px;right: 0; border-bottom: .5px solid rgb(178, 178, 178);">
+
+            <!-- <hr> -->
+        </div>
+
+
+        <h4 style="color: gray; position: absolute; top:122px;left:48%;">{{@$sale->id . @$sale->branch_id}}</h4>
+
+
+        <h4 style="color: gray; position: absolute; top:145px;left:40%;">CASH INVOICE فاتورة نقدية</h4>
+
+        <div style="position: absolute; top:170px;left:40px; width:110px">
+            <img src="{{asset('/images/logo/qr.JPG')}}" alt="Not Found" width="100%">
+        </div>
+
+        {{-- <p class="ft13 arabic-text" style=" position: absolute; top:230px;right:750px;">:<bdi>الرقم</bdi></p> --}}
+
+        <p class="ft13 arabic-text" style=" position: absolute; top:230px;right:750px;">{{@$sale->created_at}} :تاريخ</p>
+
+        <p class="ft13 arabic-text" style=" position: absolute; top:255px;right:750px;">{{@$sale->user->name}}:البانع</p>
+
+        <p class="ft13" style=" position: absolute; top:175px;right:20px;">LEZOF COMPANY LTD. </p>
+
+        <p class="ft13" style=" position: absolute; top:190px;right:20px;">VAT Number: 310294957900003
+        </p>
+
+        <p class="ft13 arabic-text" style=" position: absolute; top:230px;right:20px;"> {{@$sale->buyer_name}} :اسـم العميل</p>
+
+        <p class="ft13 arabic-text" style=" position: absolute; top:255px;right:20px;"> {{@$sale->id . @$sale->branch_id}}:رقم العميل</p>
+
+
+        <p class="ft25" style="position: absolute; top:300px;left:40px">
+            Draft Invoice
+        </p>
+
+        <p class="ft25" style="position: absolute; top:300px;left:40%">
+            INV/2024/{{@$sale->id }}
+        </p>
+
+        <p class="ft25" style="position: absolute; top:300px;right: 20px;">
+            فاتورة مسودة
+        </p>
+
+        <table class="ft13" style="position: absolute; top:335px;right: 30px; left: 30px; border: 2px solid black; width: 94%;" border="2px solid black">
+
+            <tr>
+                <th>
+                    السعر الاجمالي <br> TOTAL PRICE
+                </th>
+                <th>
+                    اسم<br>Name
+                </th>
+                <th>
+                    قيمة الضريبة <br>VAT AMOUNT
+                </th>
+
+                <th>
+                    العدد<br>UNIT PRICE
+                </th>
+                <th>
+                    ؤصف الصنف<br>QUANTITY
+                </th>
+                <th>
+                    رقم الصنف<br>DESCRIPTION
+                </th>
+            </tr>
+            {{-- <tr>
+                <th>
+                    السعر الاجمالي <br> TOTAL PRICE
+                </th>
+                <th>
+                    قيمة الضريبة <br>VAT AMOUNT
+                </th>
+
+                <th>
+                    مبلغ <br>AMOUNT
+                </th>
+                <th>
+                    لضرائب <br>TAXES
+                </th>
+                <th>
+                    سعر الوحدة <br>UNIT PRICE
+                </th>
+                <th>
+                    ا لكمية <br>QUANTITY
+                </th>
+                <th>
+                    الوصف <br>DESCRIPTION
+                </th>
+            </tr> --}}
+
+
+            @foreach ($sale->saleItems as $item)
+
                 <tr>
-                    <th>TOTAL PRICE</th>
-                    <th>VAT AMOUNT</th>
-                    <th>AMOUNT</th>
-                    <th>TAXES</th>
-                    <th>UNIT PRICE</th>
-                    <th>QUANTITY</th>
-                    <th>DESCRIPTION</th>
+                    <td>
+                        {{ @$item->price }}
+                    </td>
+                    <td>
+                        {{@$item->inventory->name}}
+                    </td>
+                    <td>
+                        {{$item->vat}}
+                    </td>
+
+                    <td>
+                        {{@$item->inventory->price}}
+                    </td>
+
+                    <td>
+                        {{@$item->quantity_sold}}
+                    </td>
+                    <td>
+                        {{@$item->inventory->description}}
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>120000</td>
-                    <td>55334</td>
-                    <td>45345</td>
-                    <td>642</td>
-                    <td>3000</td>
-                    <td>Normal</td>
-                    <td>Charger</td>
-                </tr>
-                <tr>
-                    <td>160000</td>
-                    <td>55334</td>
-                    <td>656353</td>
-                    <td>653</td>
-                    <td>2000</td>
-                    <td>Excellent</td>
-                    <td>Headphone</td>
-                </tr>
-                <tr>
-                    <td>170000</td>
-                    <td>753834</td>
-                    <td>5633465</td>
-                    <td>553</td>
-                    <td>1000</td>
-                    <td>Fine</td>
-                    <td>Mouse</td>
-                </tr>
-            </tbody>
+            @endforeach
+
+
         </table>
-        <div class="line-below"></div>
-    </section>
 
-    <!-- Footer Section -->
-    <footer class="footer">
-        <div>Phone No: 123-456-7890</div>
-        <div>Address: 123 Main St, Anytown, KSA</div>
-    </footer>
+        <table class="ft13" style="position: absolute; bottom:180px;right: 30px; left: 30px; border: 2px solid black; " border="2px solid black">
+
+            <tr>
+                <td>
+                    {{@$sale->price}}
+                </td>
+                <th>
+                    الإجمالي الفرعي / Subtotal
+
+                </th>
+            </tr>
+{{--
+            <tr>
+                <td>
+                    VAT Taxes
+                </td>
+                <td>
+                    {{@$item->vat}}
+                </td>
+            </tr> --}}
+
+            <tr>
+                <td>
+                    {{@$sale->total_price}}
+                </td>
+                <td>
+                    Total / المجموع
+                </td>
+            </tr>
+
+        </table>
+
+        <p class="ft12" style="position: absolute; bottom: 105px; right: 20px;">
+            Payment Reference : رقم إشارة الدفعة: /2024/000016INV
+        </p>
+
+
+        <div style="position: absolute; bottom: 100px; left: 0px;right: 0; border-bottom: 2px solid rgb(178, 178, 178);">
+
+            <!-- <hr> -->
+        </div>
+
+        <p class="ft15" style="position: absolute; bottom:60px;right: 34%;">
+            0576650902 safeeyestrading@gmail.com
+        </p>
+        <p class="ft15" style="position: absolute; bottom:30px;right: 31%;">
+            Riyadh Bank IBAN: SA6820000002463093139940
+        </p>
+
+    </div>
+
 </body>
 
 </html>

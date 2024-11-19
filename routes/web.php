@@ -1,16 +1,63 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ZakatController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\SubAdmin\SaleController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\SubAdmin\AttendanceController;
 use App\Http\Controllers\Admin\InventoryCategoryController;
+use App\Http\Controllers\Frontend\frontend;
+use App\Http\Controllers\Frontend\frontendController;
 use App\Http\Controllers\SuperAdmin\SaleController as SuperAdminSaleController;
 
-Route::redirect('/', '/dashboard');
+
+Route::get('/optimize', function() {
+    Artisan::call('optimize');
+    return "optimized!";
+});
+
+    // routes/web.php
+Route::get('lang/{locale}', function ($locale) {
+    Session::put('locale', $locale);
+    return redirect()->back();
+})->name('setLanguage');
+
+// Route::redirect('/', '/dashboard');
+
+Route::get('/', [frontendController::class, 'index'])->name('home');
+Route::get('/service1', function() {
+    return view('frontend.services.service1');
+});
+Route::get('/service2', function() {
+    return view('frontend.services.service2');
+});
+Route::get('/service3', function() {
+    return view('frontend.services.service3');
+});
+Route::get('/service4', function() {
+    return view('frontend.services.service4');
+});
+Route::get('/service5', function() {
+    return view('frontend.services.service5');
+});
+Route::get('/service6', function() {
+    return view('frontend.services.service6');
+});
+
+Route::get('/service7', function() {
+    return view('frontend.services.service7');
+});
+
+Route::get('/service8', function() {
+    return view('frontend.services.service8');
+});
+
+
 
 
 Route::get('register', [AuthController::class, 'registerPage'])->name('register');
@@ -26,6 +73,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/all-branch-sales', [SaleController::class, 'allBranchSales'])->name('branch.allSales');
+
+
 
 
 
@@ -163,4 +212,18 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+
+
+
+
+    // --------------========= ZAKAT
+
+
+    Route::get('/zakat', [ZakatController::class, 'index'])->name('zakat.index');
+    Route::get('/zakat/{id}/edit', [ZakatController::class, 'edit'])->name('admin.zakat.edit');
+    Route::post('/zakat/{id}/update', [ZakatController::class, 'update'])->name('admin.zakat.update');
+
+
+
 });
+

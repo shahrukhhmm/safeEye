@@ -30,16 +30,18 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:6|confirmed',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'status' => 'pending',
         ]);
 
-        Auth::login($user);
+        // Auth::login($user);
 
         return redirect()->route('dashboard');
     }
@@ -57,11 +59,17 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->route('dashboard');
+            if (Auth::user()->status === 'active') {
+                return redirect()->route('dashboard');
+            }
+
+            Auth::logout();
+            return back()->withErrors(['email' => 'Your account is not active.']);
         }
 
         return back()->withErrors(['email' => 'Invalid credentials.']);
     }
+
 
     public function logout(Request $request)
     {
@@ -74,6 +82,12 @@ class AuthController extends Controller
 
     public function dashboard()
     {
+        $user = Auth::user();
+
+        if($user->role_id == 2){
+            return redirect('/user-attendance');
+        }
+
         $user = User::count();
         $branch = Branch::count();
         $inventory = Inventory::count();

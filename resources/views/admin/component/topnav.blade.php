@@ -64,13 +64,14 @@
 
                         <li class="icons dropdown d-none d-md-flex">
                             <a href="javascript:void(0)" class="log-user" data-toggle="dropdown">
-                                <span>English</span> <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
+                                <span>{{ __('SE.language') }}</span>
+                                <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                             </a>
-                            <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
+                            <div class="drop-down dropdown-language animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li><a href="javascript:void()">English</a></li>
-                                        <li><a href="javascript:void()">Dutch</a></li>
+                                        <li><a href="{{ route('setLanguage', ['locale' => 'en']) }}">English</a></li>
+                                        <li><a href="{{ route('setLanguage', ['locale' => 'ar']) }}">Arabic</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -86,7 +87,7 @@
                                     <ul>
                                         <li>
                                             <a href="{{url('/profile-user')}}"><i class="icon-user"></i>
-                                                <span>Update Profile</span></a>
+                                                <span>{{ __('SE.update_profile') }}</span></a>
                                         </li>
                                         {{-- <li>
                                             <a href="javascript:void()">
@@ -99,7 +100,7 @@
 
                                         <li><a href="page-login.html"><span>  <form method="POST" action="{{ route('logout') }}">
                                             @csrf
-                                            <button type="submit" class="btn bg-transparent"><i class="icon-key"></i> Logout</button>
+                                            <button type="submit" class="btn bg-transparent"><i class="icon-key"></i> {{ __('SE.logout') }}</button>
                                         </form></span></a>
                                         </li>
                                     </ul>

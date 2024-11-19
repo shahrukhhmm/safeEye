@@ -28,4 +28,7 @@
 
 </head>
 
-<body>
+{{-- <body style="background-image: linear-gradient(
+    rgba(255, 255, 255, 0),rgba(255, 255, 255, 0.8)),url('{{asset("images/logo/logo.png")}}'); background-position:top center;background-repeat:no-repeat;background-size:cover"> --}}
+
+    <body>
